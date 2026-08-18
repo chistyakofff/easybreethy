@@ -3,8 +3,10 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { getExerciseById } from '../data/exercises';
 import { DEFAULT_DURATION_MINUTES } from '../data/durations';
 import { useBreathingTimer } from '../hooks/useBreathingTimer';
+import { usePhaseSound } from '../hooks/usePhaseSound';
 import { BreathCircle } from '../components/BreathCircle';
 import { DurationPicker } from '../components/DurationPicker';
+import { SoundControl } from '../components/SoundControl';
 import { formatDuration, pluralizeMinutes } from '../utils/time';
 import './ExercisePage.css';
 
@@ -22,6 +24,7 @@ export function ExercisePage() {
 function ExercisePageContent({ exercise }) {
   const [duration, setDuration] = useState(DEFAULT_DURATION_MINUTES);
   const timer = useBreathingTimer(exercise, duration);
+  const sound = usePhaseSound(timer.running, timer.phaseIndex, timer.totalElapsed);
   const isIdle = !timer.running && timer.totalElapsed === 0;
 
   useEffect(() => {
@@ -32,7 +35,7 @@ function ExercisePageContent({ exercise }) {
   }, [exercise]);
 
   const timeLabel = timer.isInfinite
-    ? `∞ · Прошло ${formatDuration(timer.totalElapsed)}`
+    ? `∞ · Прошло ${formatDuration(Math.floor(timer.totalElapsed))}`
     : `Осталось ${formatDuration(timer.remainingSeconds)}`;
 
   return (
@@ -86,6 +89,8 @@ function ExercisePageContent({ exercise }) {
           </div>
         ) : (
           <>
+            <SoundControl sound={sound} />
+
             {isIdle && <DurationPicker value={duration} onChange={setDuration} />}
 
             <BreathCircle

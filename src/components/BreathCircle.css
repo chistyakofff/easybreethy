@@ -37,12 +37,12 @@
   align-items: center;
   justify-content: center;
   gap: 4px;
-  background: radial-gradient(circle at 32% 28%, var(--orb-highlight), var(--orb-mid) 55%, var(--orb-edge) 100%);
+  background-color: var(--orb-bg);
   box-shadow:
     0 0 0 1px var(--orb-inset) inset,
     var(--orb-shadow-rest);
   will-change: transform;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .breath-circle__orb.is-running {
@@ -57,7 +57,10 @@
   font-size: clamp(15px, 3.6vw, 18px);
   font-weight: 700;
   letter-spacing: 0.02em;
-  color: var(--phase-color, var(--accent-strong));
+  /* Смешиваем цвет фазы с основным текстовым цветом, а не берём его чистым —
+     на градиенте шара чистый phase-color даёт слишком низкий контраст
+     (особенно в тёмной теме, где текст и фон оказываются похожей яркости). */
+  color: color-mix(in srgb, var(--phase-color, var(--accent-strong)) 55%, var(--text-primary));
   text-transform: uppercase;
 }
 

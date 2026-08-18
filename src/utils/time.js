@@ -1,5 +1,9 @@
+// Принимает уже целое число секунд — округление делает вызывающий код,
+// чтобы момент "тика" можно было выбрать (ceil для обратного отсчёта,
+// floor для счёта вперёд) и синхронизировать с таймером фазы в BreathCircle,
+// который тоже считает через Math.ceil.
 export function formatDuration(totalSeconds) {
-  const safeSeconds = Math.max(0, Math.round(totalSeconds));
+  const safeSeconds = Math.max(0, Math.trunc(totalSeconds));
   const minutes = Math.floor(safeSeconds / 60);
   const seconds = safeSeconds % 60;
   return `${minutes}:${String(seconds).padStart(2, '0')}`;

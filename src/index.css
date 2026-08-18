@@ -47,9 +47,7 @@
   --shadow-md: 0 12px 32px rgba(20, 70, 130, 0.12);
   --shadow-lg: 0 24px 60px rgba(15, 60, 120, 0.18);
 
-  --orb-highlight: #ffffff;
-  --orb-mid: var(--blue-100);
-  --orb-edge: var(--blue-200);
+  --orb-bg: #eaf4ff;
   --orb-inset: rgba(255, 255, 255, 0.6);
   --orb-inset-active: rgba(255, 255, 255, 0.7);
   --orb-shadow-rest: 0 18px 40px rgba(31, 99, 196, 0.22);
@@ -103,9 +101,7 @@
     --shadow-md: 0 14px 34px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 26px 64px rgba(0, 0, 0, 0.5);
 
-    --orb-highlight: #dceeff;
-    --orb-mid: #26405f;
-    --orb-edge: #142236;
+    --orb-bg: #16294a;
     --orb-inset: rgba(255, 255, 255, 0.16);
     --orb-inset-active: rgba(255, 255, 255, 0.22);
     --orb-shadow-rest: 0 18px 40px rgba(0, 0, 0, 0.45);
@@ -149,9 +145,7 @@
   --shadow-md: 0 14px 34px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 26px 64px rgba(0, 0, 0, 0.5);
 
-  --orb-highlight: #dceeff;
-  --orb-mid: #26405f;
-  --orb-edge: #142236;
+  --orb-bg: #16294a;
   --orb-inset: rgba(255, 255, 255, 0.16);
   --orb-inset-active: rgba(255, 255, 255, 0.22);
   --orb-shadow-rest: 0 18px 40px rgba(0, 0, 0, 0.45);
@@ -195,6 +189,22 @@ button {
 
 a {
   color: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus,
+a:focus {
+  outline: none;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 ::selection {

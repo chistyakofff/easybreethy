@@ -106,8 +106,13 @@ export function useBreathingTimer(exercise, durationMinutes) {
   const progress = phase.duration > 0 ? Math.min(elapsed / phase.duration, 1) : 1;
   const { from, to } = scaleKeyframes[phaseIndex];
   const scale = from + (to - from) * progress;
-  const timeLeft = Math.max(1, Math.ceil(phase.duration - elapsed));
-  const remainingSeconds = isInfinite ? null : Math.max(0, durationSeconds - totalElapsed);
+  // Floor сначала, вычитание целых чисел потом — иначе при вычитании из
+  // большого durationSeconds (сотни/тысячи секунд) теряется точность в дробной
+  // части иначе, чем при вычитании из маленького phase.duration, и секундомер
+  // фазы и общий таймер "тикают" в разные моменты (расхождение на кадр и больше
+  // на длинных сессиях).
+  const timeLeft = Math.max(1, phase.duration - Math.floor(elapsed));
+  const remainingSeconds = isInfinite ? null : Math.max(0, durationSeconds - Math.floor(totalElapsed));
 
   return {
     phase,
