@@ -1,0 +1,32 @@
+.duration-picker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 5px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.duration-picker__option {
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 9px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.duration-picker__option:hover {
+  color: var(--accent-strong);
+}
+
+.duration-picker__option.is-active {
+  background: linear-gradient(135deg, var(--blue-500), var(--blue-700));
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(31, 99, 196, 0.32);
+}
